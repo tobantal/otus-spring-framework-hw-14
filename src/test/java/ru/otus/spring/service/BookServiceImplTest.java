@@ -61,12 +61,6 @@ class BookServiceImplTest {
 		bookService.save(new Book(null, "NEW BOOK", author, genre));
 		verify(bookRepository, times(1)).save(any());
 	}
-	
-	@Test
-	void testDeleteBookById() {
-		bookService.deleteBookById(1L);
-		verify(bookRepository, times(1)).deleteById(1L);
-	}
 
 	@Test
 	void testFindAllBooks() {
