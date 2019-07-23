@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{app.title}"></title>
+<link rel="stylesheet" th:href="@{/css/styles.css}" />
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" th:href="@{/css/_variables.scss}" />
+<link rel="stylesheet" th:href="@{/css/_bootswatch.scss}" />
+</head>
+
+<body>
+
+	<h1 th:text="#{book.add-book}" style="margin-left: 20px"></h1>
+	
+	<a href="/books" class="btn btn-info" style="margin-left: 20px" th:text="#{book.info}">Books Info</a>
+	
+	<div class="bs-docs-section"
+		style="width: 100%; text-align: center; margin-top: 20px;">
+		<!-- form -->
+		<div class="bs-component" style="display: inline-block; width: 60%">
+			<div class="card border-secondary ">
+
+				<div class="card-body">
+
+					<form action="#" th:action="@{/books}" th:object="${book}"
+						method="POST">
+						
+						<!-- id -->
+						<input type="hidden" th:field="*{id}">
+
+						<!-- name -->
+						<div class="form-group ">
+							<label class="form-control-label" th:text="#{book.name}" /></label>
+
+							<input class="form-control" type="text" th:field="*{name}" required/>
+						</div>
+
+						<!-- author-->
+						<div class="form-group">
+							<label class="form-control-label" th:text="#{book.author}" /></label>
+
+							<input class="form-control" type="text" th:field="*{author.name}"
+								required/>
+						</div>
+
+						<!-- genre -->
+						<div class="form-group">
+							<label class="form-control-label" th:text="#{book.genre}" /></label>
+							<input class="form-control" type="text" th:field="*{genre.name}"
+								required/>
+						</div>
+
+						<input type="submit" th:value="#{book.save}"
+							class="btn btn-primary" />
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

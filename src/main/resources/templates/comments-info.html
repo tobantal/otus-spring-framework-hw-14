@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{app.title}"></title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" th:href="@{/css/_variables.scss}" />
+<link rel="stylesheet" th:href="@{/css/_bootswatch.scss}" />
+</head>
+
+<body>
+
+	<h1 style="margin-left: 20px">Comments</h1>
+
+	<a href="/books" class="btn btn-info" style="margin-left: 20px" th:text="#{book.info}">BOOKS
+		INFO</a>
+
+	<form style="margin: 20px" action="#" th:action="@{/comment}" th:object="${commentDto}"
+		method="POST">
+			<div class="form-group ">
+			<input type="hidden" th:field="*{book}" th:value="${book}"/>
+			<input class="form-control" type="text" th:field="*{text}" required/>
+			</div>
+			<input type="submit" th:value="#{comment.add-comment}"
+							class="btn btn-primary" />
+	</form>
+
+	<div class="bs-docs-section">
+		<table class="table table-hover" style="margin: 20px">
+			<thead>
+				<tr>
+					<th th:text="#{book.id}">Id</th>
+					<th th:text="#{comment.date}">Date</th>
+					<th th:text="#{comment.text}">Text</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="comment : ${comments}">
+					<td th:text="${comment.id}">Id</td>
+					<td th:text="${comment.date}">Date</td>
+					<td th:text="${comment.text}">Text</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

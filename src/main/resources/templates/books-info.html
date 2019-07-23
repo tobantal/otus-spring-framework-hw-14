@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{app.title}"></title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" th:href="@{/css/_variables.scss}" />
+<link rel="stylesheet" th:href="@{/css/_bootswatch.scss}" />
+</head>
+
+<body>
+
+	<h1 style="margin-left: 20px" th:text="#{book.info}">Find All Books</h1>
+	<h3 th:text="${booksSizeInfo}" style="color: green; margin-left: 20px"></h3>
+	
+	<a href="/book-form" class="btn btn-success" style="margin-left: 20px" th:text="#{book.add-book}">Add book</a>
+	
+	<div class="bs-docs-section">
+		<table class="table table-hover" style="margin: 20px">
+			<thead>
+				<tr>
+					<th th:text="#{book.id}">Id</th>
+					<th th:text="#{book.name}">Name</th>
+					<th th:text="#{book.author}">Author</th>
+					<th th:text="#{book.genre}">Genre</th>
+					<th th:text="#{book.delete}">Delete</th>
+					<th th:text="#{book.update}">Update</th>
+					<th th:text="#{book.comments}">Comments</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="book : ${books}">
+					<td th:text="${book.id}">Id</td>
+					<td th:text="${book.name}">Book Name</td>
+					<td th:text="${book.author.name}">Author Name</td>
+					<td th:text="${book.genre.name}">Genre Name</td>
+					<td>
+						<form th:action="@{/books/__${book.id}__}" th:method="delete">
+							<input type="hidden" name="_method" value="delete">
+							<button type="submit" class="btn btn-danger">DELETE</button>
+						</form>
+					</td>
+					<td>
+						<form th:action="@{/book-form/__${book.id}__}" th:method="put">
+							<input type="hidden" name="_method" value="put">
+							<button type="submit" class="btn btn-warning">UPDATE</button>
+						</form>
+					</td>
+					<td>
+						<form th:action="@{/books/__${book.id}__/comments}" th:method="get">
+							<input type="hidden" name="_method" value="get">
+							<button type="submit" class="btn btn-info">COMMENTS</button>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
